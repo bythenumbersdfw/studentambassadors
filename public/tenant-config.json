@@ -1,0 +1,23 @@
+{
+  "appName": "Student Ambassadors",
+  "logo": "/favicon.svg",
+  "favicon": "/favicon.svg",
+  "apiUrl": "https://api.yourtenant.com",
+  "colors": {
+    "--accent": "#aa3bff",
+    "--accent-bg": "rgba(170, 59, 255, 0.1)",
+    "--accent-border": "rgba(170, 59, 255, 0.5)"
+  },
+  "links": {
+    "docs": [
+      { "label": "Explore Vite", "href": "https://vite.dev/", "iconType": "vite" },
+      { "label": "Learn more", "href": "https://react.dev/", "iconType": "react" }
+    ],
+    "social": [
+      { "label": "GitHub", "href": "https://github.com/vitejs/vite", "iconType": "github" },
+      { "label": "Discord", "href": "https://chat.vite.dev/", "iconType": "discord" },
+      { "label": "X.com", "href": "https://x.com/vite_js", "iconType": "x" },
+      { "label": "Bluesky", "href": "https://bsky.app/profile/vite.dev", "iconType": "bluesky" }
+    ]
+  }
+}
