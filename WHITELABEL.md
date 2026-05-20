@@ -38,23 +38,37 @@ For a custom icon, add an SVG symbol to `public/icons.svg` and use its ID as `ic
 
 ## Colors
 
-Override any CSS variable under the `colors` key. Keys must match the CSS variable name exactly (include the `--` prefix).
+The `colors` object sets light-mode CSS variables. Keys must match the CSS variable name exactly (include the `--` prefix). The defaults below are the built-in theme — copy and modify as needed.
 
 ```json
 "colors": {
-  "--accent": "#0055FF",
-  "--accent-bg": "rgba(0, 85, 255, 0.1)",
-  "--accent-border": "rgba(0, 85, 255, 0.4)"
+  "--text": "#6b6375",
+  "--text-h": "#08060d",
+  "--bg": "#fff",
+  "--border": "#e5e4e7",
+  "--code-bg": "#f4f3ec",
+  "--accent": "#aa3bff",
+  "--accent-bg": "rgba(170, 59, 255, 0.1)",
+  "--accent-border": "rgba(170, 59, 255, 0.5)",
+  "--social-bg": "rgba(244, 243, 236, 0.5)",
+  "--shadow": "rgba(0,0,0,0.1) 0 10px 15px -3px, rgba(0,0,0,0.05) 0 4px 6px -2px"
 }
 ```
 
 | Variable | Where it appears |
 |----------|-----------------|
+| `--text` | Body text |
+| `--text-h` | Headings, code text |
+| `--bg` | Page background |
+| `--border` | Dividers, section borders |
+| `--code-bg` | Inline code background |
 | `--accent` | Button text, focus rings |
 | `--accent-bg` | Button background |
 | `--accent-border` | Button hover border |
+| `--social-bg` | Social link button background |
+| `--shadow` | Hover shadow on social links |
 
-Omit `colors` entirely to use the defaults defined in `src/index.css`.
+> **Dark mode (fast follow):** Currently dark-mode colors are hardcoded in `src/index.css` and are not tenant-configurable. A future enhancement would add a `colorsDark` object to this config — the `TenantProvider` would listen for `prefers-color-scheme: dark` changes and swap variable sets at runtime. Until then, dark mode inherits the defaults in `src/index.css`.
 
 ---
 
