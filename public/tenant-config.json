@@ -1,0 +1,30 @@
+{
+  "appName": "Student Ambassadors",
+  "logo": "/favicon.svg",
+  "favicon": "/favicon.svg",
+  "apiUrl": "https://api.yourtenant.com",
+  "colors": {
+    "--text": "#6b6375",
+    "--text-h": "#08060d",
+    "--bg": "#fff",
+    "--border": "#e5e4e7",
+    "--code-bg": "#f4f3ec",
+    "--accent": "#aa3bff",
+    "--accent-bg": "rgba(170, 59, 255, 0.1)",
+    "--accent-border": "rgba(170, 59, 255, 0.5)",
+    "--social-bg": "rgba(244, 243, 236, 0.5)",
+    "--shadow": "rgba(0,0,0,0.1) 0 10px 15px -3px, rgba(0,0,0,0.05) 0 4px 6px -2px"
+  },
+  "links": {
+    "docs": [
+      { "label": "Explore Vite", "href": "https://vite.dev/", "iconType": "vite" },
+      { "label": "Learn more", "href": "https://react.dev/", "iconType": "react" }
+    ],
+    "social": [
+      { "label": "GitHub", "href": "https://github.com/vitejs/vite", "iconType": "github" },
+      { "label": "Discord", "href": "https://chat.vite.dev/", "iconType": "discord" },
+      { "label": "X.com", "href": "https://x.com/vite_js", "iconType": "x" },
+      { "label": "Bluesky", "href": "https://bsky.app/profile/vite.dev", "iconType": "bluesky" }
+    ]
+  }
+}
