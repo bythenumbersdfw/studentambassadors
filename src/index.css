@@ -16,22 +16,116 @@ body {
   flex-direction: column;
 }
 
-/* Mobile-first: full width on small screens */
+/* ── Container ── */
 .app-container {
   width: 100%;
   margin: 0 auto;
 }
 
-/* Tablet: cap at 600px */
 @media (min-width: 600px) {
   .app-container {
     max-width: 600px;
   }
 }
 
-/* Desktop: cap at 720px */
 @media (min-width: 900px) {
   .app-container {
     max-width: 720px;
+  }
+}
+
+/* ── Header ── */
+.app-header {
+  padding: 14px 20px 12px;
+}
+
+.header-title {
+  font-size: 15px;
+}
+
+.header-subtitle {
+  font-size: 11px;
+}
+
+.stat-box {
+  padding: 5px 3px;
+}
+
+.stat-value {
+  font-size: 15px;
+}
+
+.stat-label {
+  font-size: 8px;
+}
+
+/* ── Nav ── */
+.nav-btn {
+  padding: 8px 5px;
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+}
+
+/* ── Tablet ── */
+@media (min-width: 600px) {
+  .app-header {
+    padding: 18px 28px 16px;
+  }
+
+  .header-title {
+    font-size: 20px;
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+  }
+
+  .stat-box {
+    padding: 8px 6px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .nav-btn {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}
+
+/* ── Desktop ── */
+@media (min-width: 900px) {
+  .app-header {
+    padding: 22px 32px 20px;
+  }
+
+  .header-title {
+    font-size: 24px;
+  }
+
+  .header-subtitle {
+    font-size: 15px;
+  }
+
+  .stat-box {
+    padding: 10px 8px;
+  }
+
+  .stat-value {
+    font-size: 26px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+  }
+
+  .nav-btn {
+    padding: 12px 10px;
+    font-size: 15px;
   }
 }

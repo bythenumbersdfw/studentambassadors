@@ -140,16 +140,16 @@ export default function AmbassadorGame(){
     <div className="app-container" style={{fontFamily:"Arial,sans-serif",background:C.lgray,minHeight:"100svh",paddingBottom:100}}>
 
       {/* HEADER */}
-      <div style={{background:C.navy,padding:"14px 20px 12px",position:"sticky",top:0,zIndex:10}}>
+      <div className="app-header" style={{background:C.navy,position:"sticky",top:0,zIndex:10}}>
         <div onClick={handleTitleTap} style={{cursor:"default"}}>
-          <div style={{color:C.white,fontSize:15,fontWeight:"bold"}}>By the Numbers 📊</div>
-          <div style={{color:"#90CAF9",fontSize:11,marginTop:1}}>NAHJ 2025 — Catch Every Story. Gotta get 'em all.</div>
+          <div className="header-title" style={{color:C.white,fontWeight:"bold"}}>By the Numbers 📊</div>
+          <div className="header-subtitle" style={{color:"#90CAF9",marginTop:1}}>NAHJ 2025 — Catch Every Story. Gotta get 'em all.</div>
         </div>
         <div style={{display:"flex",gap:5,marginTop:10}}>
           {[{label:"Surveys",value:totalSurveys,emoji:"✅"},{label:"Scans",value:totalScans,emoji:"📱"},{label:"Caught",value:passLogs.length+laterLogs.length,emoji:"🎯"},{label:"Ambassadors",value:ambassadors.length,emoji:"🤝"}].map(s=>(
-            <div key={s.label} style={{flex:1,background:"rgba(255,255,255,0.12)",borderRadius:8,padding:"5px 3px",textAlign:"center"}}>
-              <div style={{color:C.white,fontSize:15,fontWeight:"bold"}}>{s.value}</div>
-              <div style={{color:"#90CAF9",fontSize:8}}>{s.emoji} {s.label}</div>
+            <div key={s.label} className="stat-box" style={{flex:1,background:"rgba(255,255,255,0.12)",borderRadius:8,textAlign:"center"}}>
+              <div className="stat-value" style={{color:C.white,fontWeight:"bold"}}>{s.value}</div>
+              <div className="stat-label" style={{color:"#90CAF9"}}>{s.emoji} {s.label}</div>
             </div>
           ))}
         </div>
@@ -158,7 +158,7 @@ export default function AmbassadorGame(){
       {/* NAV */}
       <div style={{display:"flex",background:C.white,borderBottom:`2px solid ${C.ltblue}`,overflowX:"auto"}}>
         {[{key:"leaderboard",label:"🏆 Board"},{key:"signup",label:"✋ Join"},{key:"log",label:"➕ Log"},{key:"pass",label:"📋 Pass"},{key:"later",label:"🔖 Later"},{key:"prizes",label:"🎁 Prizes"},{key:"tasks",label:"📋 Catch List"}].map(tab=>(
-          <button key={tab.key} onClick={()=>setView(tab.key)} style={{flex:"1 0 auto",padding:"8px 5px",border:"none",cursor:"pointer",background:view===tab.key?C.ltblue:C.white,color:view===tab.key?C.navy:C.gray,fontWeight:view===tab.key?"bold":"normal",fontSize:11,borderBottom:view===tab.key?`3px solid ${C.blue}`:"3px solid transparent",whiteSpace:"nowrap"}}>
+          <button key={tab.key} onClick={()=>setView(tab.key)} className="nav-btn" style={{flex:"1 0 auto",border:"none",cursor:"pointer",background:view===tab.key?C.ltblue:C.white,color:view===tab.key?C.navy:C.gray,fontWeight:view===tab.key?"bold":"normal",borderBottom:view===tab.key?`3px solid ${C.blue}`:"3px solid transparent",whiteSpace:"nowrap"}}>
             {tab.label}
           </button>
         ))}
