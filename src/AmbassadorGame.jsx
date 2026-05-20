@@ -137,7 +137,7 @@ export default function AmbassadorGame(){
   };
 
   return(
-    <div style={{fontFamily:"Arial,sans-serif",maxWidth:480,margin:"0 auto",background:C.lgray,minHeight:"100vh",paddingBottom:100}}>
+    <div style={{fontFamily:"Arial,sans-serif",maxWidth:480,width:"100%",margin:"0 auto",background:C.lgray,minHeight:"100svh",paddingBottom:100}}>
 
       {/* HEADER */}
       <div style={{background:C.navy,padding:"14px 20px 12px",position:"sticky",top:0,zIndex:10}}>
