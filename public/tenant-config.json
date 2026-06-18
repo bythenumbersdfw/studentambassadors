@@ -1,5 +1,5 @@
 {
-  "appName": "Student Ambassadors",
+  "appName": "By the Numbers",
   "logo": "/favicon.svg",
   "favicon": "/favicon.svg",
   "apiUrl": "https://api.yourtenant.com",
@@ -13,7 +13,21 @@
     "--accent-bg": "rgba(170, 59, 255, 0.1)",
     "--accent-border": "rgba(170, 59, 255, 0.5)",
     "--social-bg": "rgba(244, 243, 236, 0.5)",
-    "--shadow": "rgba(0,0,0,0.1) 0 10px 15px -3px, rgba(0,0,0,0.05) 0 4px 6px -2px"
+    "--shadow": "rgba(0,0,0,0.1) 0 10px 15px -3px, rgba(0,0,0,0.05) 0 4px 6px -2px",
+    "--amb-navy":   "#1F4E79",
+    "--amb-blue":   "#2E75B6",
+    "--amb-ltblue": "#EBF3FB",
+    "--amb-green":  "#1E5C2E",
+    "--amb-ltgreen":"#E8F5E9",
+    "--amb-gold":   "#F57F17",
+    "--amb-ltgold": "#FFFDE7",
+    "--amb-gray":   "#595959",
+    "--amb-lgray":  "#F5F5F5",
+    "--amb-mgray":  "#E0E0E0",
+    "--amb-white":  "#FFFFFF",
+    "--amb-red":    "#B71C1C",
+    "--amb-ltred":  "#FFEBEE",
+    "--amb-orange": "#E65100"
   },
   "links": {
     "docs": [
@@ -25,6 +39,78 @@
       { "label": "Discord", "href": "https://chat.vite.dev/", "iconType": "discord" },
       { "label": "X.com", "href": "https://x.com/vite_js", "iconType": "x" },
       { "label": "Bluesky", "href": "https://bsky.app/profile/vite.dev", "iconType": "bluesky" }
+    ]
+  },
+  "ambassador": {
+    "subtitle": "Understanding the Impact and Progress of Latino Journalists in North Texas",
+    "tagline":  "Bridging the DFW Latino Journalist Experience",
+    "event":    "NAHJ 2026 National Conference",
+    "tasks": [
+      { "id": "scan",      "label": "Shared the QR code with a journalist",         "points": 5,  "emoji": "📱", "tip": "Every scan is a potential connection" },
+      { "id": "sit",       "label": "Brought someone to the project table",          "points": 10, "emoji": "☕", "tip": "A personal introduction goes a long way" },
+      { "id": "started",   "label": "Connection started the survey",                 "points": 15, "emoji": "📝", "tip": "Almost there — stay close!" },
+      { "id": "completed", "label": "Connection completed the full survey",          "points": 25, "emoji": "✅", "tip": "The most meaningful contribution. Stay with them." },
+      { "id": "dfw",       "label": "DFW connection confirmed — bonus",              "points": 20, "emoji": "⭐", "tip": "DFW journalists are the heart of this research" },
+      { "id": "mvr",       "label": "Most Valuable Connection — deep DFW tie",       "points": 35, "emoji": "🏅", "tip": "Long career, major outlet, senior role" },
+      { "id": "link",      "label": "Shared the follow-up link — logged their name", "points": 12, "emoji": "🔗", "tip": "They said yes — send the link, log their name" },
+      { "id": "later",     "label": "Post-event interest noted",                     "points": 10, "emoji": "🔖", "tip": "They want to take the survey after this event" },
+      { "id": "share",     "label": "Shared the project on social media",            "points": 8,  "emoji": "📣", "tip": "Tag the project and share widely" },
+      { "id": "recruited", "label": "Brought in another student ambassador",         "points": 15, "emoji": "🤝", "tip": "Grow the team, grow the reach" }
+    ],
+    "prizes": [
+      {
+        "place": "🥇 First Place",
+        "color": "#F57F17",
+        "bg":    "#FFFDE7",
+        "border":"#F57F17",
+        "rewards": [
+          "One-on-one mentorship session with a DFW media executive",
+          "Named Project Ambassador credit in the published research report",
+          "Letter of recommendation available on request",
+          "Cash prize (amount TBD)"
+        ]
+      },
+      {
+        "place": "🥈 Second Place",
+        "color": "#757575",
+        "bg":    "#FAFAFA",
+        "border":"#9E9E9E",
+        "rewards": [
+          "Named Project Ambassador credit in the published research report",
+          "Journalism tool subscription of your choice",
+          "Letter of recommendation available on request",
+          "Social media feature on project channels"
+        ]
+      },
+      {
+        "place": "🥉 Third Place",
+        "color": "#8B4513",
+        "bg":    "#FBF5F0",
+        "border":"#BCAAA4",
+        "rewards": [
+          "Named Project Ambassador credit in the published research report",
+          "Certificate of participation for your portfolio",
+          "Social media feature on project channels"
+        ]
+      },
+      {
+        "place": "🏅 Most Valuable Connection",
+        "color": "#1E5C2E",
+        "bg":    "#E8F5E9",
+        "border":"#1E5C2E",
+        "rewards": [
+          "Awarded separately from leaderboard standings",
+          "Named in research report as Most Valuable Connection Ambassador",
+          "Personal recognition from the Project Founder",
+          "Bonus prize TBD"
+        ]
+      }
+    ],
+    "ranks": [
+      { "min": 200, "label": "🏆 Lead Correspondent", "color": "#F57F17" },
+      { "min": 100, "label": "⭐ Senior Reporter",     "color": "#7B1FA2" },
+      { "min": 50,  "label": "📰 Field Journalist",   "color": "#2E75B6" },
+      { "min": 0,   "label": "🔰 Community Reporter", "color": "#595959" }
     ]
   }
 }
