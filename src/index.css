@@ -20,18 +20,20 @@ body {
 .app-container {
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 100px;
+  font-family: Arial, sans-serif;
 }
 
 @media (min-width: 600px) {
-  .app-container {
-    max-width: 600px;
-  }
+  .app-container { max-width: 660px; }
 }
 
 @media (min-width: 900px) {
-  .app-container {
-    max-width: 720px;
-  }
+  .app-container { max-width: 900px; }
+}
+
+@media (min-width: 1200px) {
+  .app-container { max-width: 1080px; }
 }
 
 /* ── Header ── */
@@ -41,10 +43,19 @@ body {
 
 .header-title {
   font-size: 15px;
+  font-weight: bold;
+  line-height: 1.3;
 }
 
 .header-subtitle {
-  font-size: 11px;
+  font-size: 10px;
+  margin-top: 1px;
+  line-height: 1.3;
+}
+
+.header-event {
+  font-size: 10px;
+  margin-top: 1px;
 }
 
 .stat-box {
@@ -53,6 +64,7 @@ body {
 
 .stat-value {
   font-size: 15px;
+  font-weight: bold;
 }
 
 .stat-label {
@@ -61,71 +73,129 @@ body {
 
 /* ── Nav ── */
 .nav-btn {
-  padding: 8px 5px;
+  padding: 8px 4px;
   font-size: 11px;
   font-family: Arial, sans-serif;
 }
 
-/* ── Tablet ── */
+/* ── Content area ── */
+.amb-content {
+  padding: 14px 14px 0;
+}
+
+/* ── Body text ── */
+.amb-section-h   { font-size: 15px; font-weight: bold; }
+.amb-body-text   { font-size: 12px; }
+.amb-small-text  { font-size: 11px; }
+.amb-label       { font-size: 12px; font-weight: bold; }
+.amb-card-text   { font-size: 13px; }
+.amb-card-small  { font-size: 11px; }
+.amb-score-val   { font-size: 22px; font-weight: bold; }
+.amb-score-lbl   { font-size: 10px; }
+.amb-rank-lbl    { font-size: 11px; font-weight: bold; }
+.amb-amb-name    { font-size: 14px; font-weight: bold; }
+.amb-tip-text    { font-size: 10px; }
+.amb-input       { font-size: 13px; padding: 10px 12px; }
+.amb-input-lg    { font-size: 14px; padding: 12px; }
+.amb-btn-primary { font-size: 15px; padding: 14px; }
+.amb-task-label  { font-size: 13px; }
+.amb-pts-badge   { font-size: 14px; }
+
+/* ── Leaderboard grid (2-col on wide) ── */
+.amb-lb-grid { display: block; }
+
+/* ── Tablet 600px ── */
 @media (min-width: 600px) {
-  .app-header {
-    padding: 18px 28px 16px;
-  }
+  .app-header      { padding: 18px 28px 16px; }
+  .header-title    { font-size: 20px; }
+  .header-subtitle { font-size: 13px; }
+  .header-event    { font-size: 12px; }
+  .stat-box        { padding: 8px 6px; }
+  .stat-value      { font-size: 20px; }
+  .stat-label      { font-size: 11px; }
+  .nav-btn         { padding: 10px 8px; font-size: 13px; }
+  .amb-content     { padding: 18px 22px 0; }
 
-  .header-title {
-    font-size: 20px;
-  }
+  .amb-section-h   { font-size: 18px; }
+  .amb-body-text   { font-size: 14px; }
+  .amb-small-text  { font-size: 13px; }
+  .amb-label       { font-size: 13px; }
+  .amb-card-text   { font-size: 15px; }
+  .amb-card-small  { font-size: 13px; }
+  .amb-score-val   { font-size: 26px; }
+  .amb-score-lbl   { font-size: 12px; }
+  .amb-rank-lbl    { font-size: 13px; }
+  .amb-amb-name    { font-size: 17px; }
+  .amb-tip-text    { font-size: 12px; }
+  .amb-input       { font-size: 14px; padding: 12px 14px; }
+  .amb-input-lg    { font-size: 15px; padding: 14px; }
+  .amb-btn-primary { font-size: 17px; padding: 16px; }
+  .amb-task-label  { font-size: 15px; }
+  .amb-pts-badge   { font-size: 16px; }
+}
 
-  .header-subtitle {
-    font-size: 13px;
-  }
+/* ── Desktop 900px ── */
+@media (min-width: 900px) {
+  .app-header      { padding: 22px 36px 20px; }
+  .header-title    { font-size: 26px; }
+  .header-subtitle { font-size: 15px; }
+  .header-event    { font-size: 14px; }
+  .stat-box        { padding: 12px 10px; }
+  .stat-value      { font-size: 26px; }
+  .stat-label      { font-size: 13px; }
+  .nav-btn         { padding: 12px 10px; font-size: 15px; }
+  .amb-content     { padding: 24px 36px 0; }
 
-  .stat-box {
-    padding: 8px 6px;
-  }
+  .amb-section-h   { font-size: 22px; }
+  .amb-body-text   { font-size: 16px; }
+  .amb-small-text  { font-size: 14px; }
+  .amb-label       { font-size: 14px; }
+  .amb-card-text   { font-size: 17px; }
+  .amb-card-small  { font-size: 14px; }
+  .amb-score-val   { font-size: 32px; }
+  .amb-score-lbl   { font-size: 13px; }
+  .amb-rank-lbl    { font-size: 14px; }
+  .amb-amb-name    { font-size: 20px; }
+  .amb-tip-text    { font-size: 13px; }
+  .amb-input       { font-size: 16px; padding: 14px 16px; }
+  .amb-input-lg    { font-size: 17px; padding: 16px; }
+  .amb-btn-primary { font-size: 19px; padding: 18px; }
+  .amb-task-label  { font-size: 17px; }
+  .amb-pts-badge   { font-size: 20px; }
 
-  .stat-value {
-    font-size: 20px;
-  }
-
-  .stat-label {
-    font-size: 11px;
-  }
-
-  .nav-btn {
-    padding: 10px 8px;
-    font-size: 13px;
+  .amb-lb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
 }
 
-/* ── Desktop ── */
-@media (min-width: 900px) {
-  .app-header {
-    padding: 22px 32px 20px;
-  }
+/* ── Wide 1200px ── */
+@media (min-width: 1200px) {
+  .app-header      { padding: 26px 48px 24px; }
+  .header-title    { font-size: 30px; }
+  .header-subtitle { font-size: 17px; }
+  .header-event    { font-size: 15px; }
+  .stat-box        { padding: 14px 12px; }
+  .stat-value      { font-size: 30px; }
+  .stat-label      { font-size: 14px; }
+  .nav-btn         { padding: 14px 14px; font-size: 16px; }
+  .amb-content     { padding: 28px 48px 0; }
 
-  .header-title {
-    font-size: 24px;
-  }
-
-  .header-subtitle {
-    font-size: 15px;
-  }
-
-  .stat-box {
-    padding: 10px 8px;
-  }
-
-  .stat-value {
-    font-size: 26px;
-  }
-
-  .stat-label {
-    font-size: 13px;
-  }
-
-  .nav-btn {
-    padding: 12px 10px;
-    font-size: 15px;
-  }
+  .amb-section-h   { font-size: 26px; }
+  .amb-body-text   { font-size: 17px; }
+  .amb-small-text  { font-size: 15px; }
+  .amb-label       { font-size: 15px; }
+  .amb-card-text   { font-size: 18px; }
+  .amb-card-small  { font-size: 15px; }
+  .amb-score-val   { font-size: 36px; }
+  .amb-score-lbl   { font-size: 14px; }
+  .amb-rank-lbl    { font-size: 15px; }
+  .amb-amb-name    { font-size: 22px; }
+  .amb-tip-text    { font-size: 14px; }
+  .amb-input       { font-size: 17px; padding: 16px 18px; }
+  .amb-input-lg    { font-size: 18px; padding: 18px; }
+  .amb-btn-primary { font-size: 20px; padding: 20px; }
+  .amb-task-label  { font-size: 18px; }
+  .amb-pts-badge   { font-size: 22px; }
 }
