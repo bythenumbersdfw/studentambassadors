@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTenant } from "./TenantContext";
+import { submitAmbassadorSignup, submitActivity, submitRespondentContact } from "./airtable";
 
 const C = {
   navy:    "var(--amb-navy)",
@@ -58,6 +59,12 @@ export default function AmbassadorGame() {
   const [creditForm, setCreditForm]   = useState({ ambassadorIdx: "", taskId: "sit", note: "" });
   const [creditFlash, setCreditFlash] = useState(null);
   const [linkLogs, setLinkLogs]       = useState([]);
+  const [toast, setToast]             = useState(null);
+
+  const showError = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 5000);
+  };
 
   const handleTitleTap = () => {
     const n = tapCount + 1;
@@ -105,13 +112,22 @@ export default function AmbassadorGame() {
     setAmbassadors(updated);
     const pts = TASKS.find((t) => t.id === logForm.taskId)?.points || 0;
     setFlash({ name: ambassadors[selected].name, pts });
+    submitActivity({
+      ambassadorAirtableId: ambassadors[selected].airtableId,
+      taskId:        logForm.taskId,
+      respondentName: logForm.respondentName,
+      note:          logForm.note,
+      source:        "self",
+      points:        pts,
+    }).catch(e => showError(`Failed to save activity: ${e.message}`));
     setLogForm({ taskId: "", note: "", respondentName: "" });
     setTimeout(() => setFlash(null), 2800);
   };
 
   const handleSignup = () => {
     if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()) return;
-    setAmbassadors([...ambassadors, {
+    const newAmb = {
+      localId:           `${Date.now()}-${Math.random()}`,
       name:              signupForm.name.trim(),
       university:        signupForm.university.trim(),
       org:               signupForm.org.trim() || "Not specified",
@@ -121,16 +137,31 @@ export default function AmbassadorGame() {
       status:            "pending",
       logs:              [],
       submittedAt:       new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-    }]);
+      airtableId:        null,
+    };
+    setAmbassadors(prev => [...prev, newAmb]);
     setSignupDone(true);
+    submitAmbassadorSignup({
+      name:              newAmb.name,
+      university:        newAmb.university,
+      org:               newAmb.org,
+      sponsorName:       newAmb.sponsorName,
+      sponsorEmail:      newAmb.sponsorEmail,
+      showOnLeaderboard: newAmb.showOnLeaderboard,
+    }).then(id => {
+      setAmbassadors(prev => prev.map(a =>
+        a.localId === newAmb.localId ? { ...a, airtableId: id } : a
+      ));
+    }).catch(e => showError(`Signup save failed: ${e.message}`));
   };
 
   const handleLink = () => {
     if (!linkForm.contactName.trim() || selected === null) return;
+    const amb = ambassadors[selected];
     const entry = {
       contactName:    linkForm.contactName,
       note:           linkForm.note,
-      ambassadorName: ambassadors[selected].name,
+      ambassadorName: amb.name,
       time:           new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     };
     setLinkLogs([...linkLogs, entry]);
@@ -145,6 +176,20 @@ export default function AmbassadorGame() {
         }],
       }
     ));
+    const pts = TASKS.find((t) => t.id === "link")?.points || 0;
+    submitActivity({
+      ambassadorAirtableId: amb.airtableId,
+      taskId:        "link",
+      respondentName: linkForm.contactName,
+      note:          linkForm.note,
+      source:        "self",
+      points:        pts,
+    }).catch(e => showError(`Failed to save link activity: ${e.message}`));
+    submitRespondentContact({
+      name:                linkForm.contactName,
+      ambassadorAirtableId: amb.airtableId,
+      formType:            'Learn More',
+    }).catch(e => showError(`Failed to save contact: ${e.message}`));
     setLinkForm({ contactName: "", note: "" });
     setLinkFlash(true);
     setTimeout(() => setLinkFlash(false), 2800);
@@ -153,6 +198,16 @@ export default function AmbassadorGame() {
   const handleLater = () => {
     if (!laterForm.email.trim()) return;
     setLaterLogs([...laterLogs, { ...laterForm, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }]);
+    const ambByName = laterForm.ambassadorName
+      ? ambassadors.find(a => a.name === laterForm.ambassadorName)
+      : null;
+    submitRespondentContact({
+      name:                laterForm.name,
+      email:               laterForm.email,
+      phone:               laterForm.phone,
+      ambassadorAirtableId: ambByName?.airtableId || null,
+      formType:            'Survey',
+    }).catch(e => showError(`Failed to save follow-up: ${e.message}`));
     setLaterForm({ name: "", email: "", phone: "", ambassadorName: "", note: "" });
     setLaterFlash(true);
     setTimeout(() => setLaterFlash(false), 2800);
@@ -174,6 +229,13 @@ export default function AmbassadorGame() {
         }],
       }
     ));
+    submitActivity({
+      ambassadorAirtableId: ambassadors[idx].airtableId,
+      taskId:        creditForm.taskId,
+      note:          creditForm.note || "Credited by Project Founder",
+      source:        "founder",
+      points:        task?.points || 0,
+    }).catch(e => showError(`Failed to save credit: ${e.message}`));
     setCreditFlash({ name: ambassadors[idx].name, pts: task?.points || 0 });
     setCreditForm({ ambassadorIdx: "", taskId: "sit", note: "" });
     setTimeout(() => setCreditFlash(null), 3000);
@@ -245,6 +307,13 @@ export default function AmbassadorGame() {
           </button>
         ))}
       </div>
+
+      {toast && (
+        <div style={{ background: "#FFEBEE", border: "1px solid #EF5350", borderRadius: 8, padding: "10px 14px", margin: "8px 0", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span className="amb-small-text" style={{ color: "#C62828" }}>⚠️ {toast}</span>
+          <button onClick={() => setToast(null)} style={{ background: "none", border: "none", cursor: "pointer", color: "#C62828", fontWeight: "bold", fontSize: "1.1em" }}>×</button>
+        </div>
+      )}
 
       <div className="amb-content">
 
