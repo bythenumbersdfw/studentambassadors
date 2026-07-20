@@ -59,6 +59,12 @@ export default function AmbassadorGame() {
   const [creditForm, setCreditForm]   = useState({ ambassadorIdx: "", taskId: "sit", note: "" });
   const [creditFlash, setCreditFlash] = useState(null);
   const [linkLogs, setLinkLogs]       = useState([]);
+  const [toast, setToast]             = useState(null);
+
+  const showError = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 5000);
+  };
 
   const handleTitleTap = () => {
     const n = tapCount + 1;
@@ -113,7 +119,7 @@ export default function AmbassadorGame() {
       note:          logForm.note,
       source:        "self",
       points:        pts,
-    }).catch(console.error);
+    }).catch(e => showError(`Failed to save activity: ${e.message}`));
     setLogForm({ taskId: "", note: "", respondentName: "" });
     setTimeout(() => setFlash(null), 2800);
   };
@@ -121,6 +127,7 @@ export default function AmbassadorGame() {
   const handleSignup = () => {
     if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()) return;
     const newAmb = {
+      localId:           `${Date.now()}-${Math.random()}`,
       name:              signupForm.name.trim(),
       university:        signupForm.university.trim(),
       org:               signupForm.org.trim() || "Not specified",
@@ -143,9 +150,9 @@ export default function AmbassadorGame() {
       showOnLeaderboard: newAmb.showOnLeaderboard,
     }).then(id => {
       setAmbassadors(prev => prev.map(a =>
-        a.name === newAmb.name && a.airtableId === null ? { ...a, airtableId: id } : a
+        a.localId === newAmb.localId ? { ...a, airtableId: id } : a
       ));
-    }).catch(console.error);
+    }).catch(e => showError(`Signup save failed: ${e.message}`));
   };
 
   const handleLink = () => {
@@ -177,14 +184,12 @@ export default function AmbassadorGame() {
       note:          linkForm.note,
       source:        "self",
       points:        pts,
-    }).catch(console.error);
+    }).catch(e => showError(`Failed to save link activity: ${e.message}`));
     submitRespondentContact({
       name:                linkForm.contactName,
-      email:               '',
-      phone:               '',
       ambassadorAirtableId: amb.airtableId,
       formType:            'Learn More',
-    }).catch(console.error);
+    }).catch(e => showError(`Failed to save contact: ${e.message}`));
     setLinkForm({ contactName: "", note: "" });
     setLinkFlash(true);
     setTimeout(() => setLinkFlash(false), 2800);
@@ -202,7 +207,7 @@ export default function AmbassadorGame() {
       phone:               laterForm.phone,
       ambassadorAirtableId: ambByName?.airtableId || null,
       formType:            'Survey',
-    }).catch(console.error);
+    }).catch(e => showError(`Failed to save follow-up: ${e.message}`));
     setLaterForm({ name: "", email: "", phone: "", ambassadorName: "", note: "" });
     setLaterFlash(true);
     setTimeout(() => setLaterFlash(false), 2800);
@@ -227,11 +232,10 @@ export default function AmbassadorGame() {
     submitActivity({
       ambassadorAirtableId: ambassadors[idx].airtableId,
       taskId:        creditForm.taskId,
-      respondentName: '',
       note:          creditForm.note || "Credited by Project Founder",
       source:        "founder",
       points:        task?.points || 0,
-    }).catch(console.error);
+    }).catch(e => showError(`Failed to save credit: ${e.message}`));
     setCreditFlash({ name: ambassadors[idx].name, pts: task?.points || 0 });
     setCreditForm({ ambassadorIdx: "", taskId: "sit", note: "" });
     setTimeout(() => setCreditFlash(null), 3000);
@@ -303,6 +307,13 @@ export default function AmbassadorGame() {
           </button>
         ))}
       </div>
+
+      {toast && (
+        <div style={{ background: "#FFEBEE", border: "1px solid #EF5350", borderRadius: 8, padding: "10px 14px", margin: "8px 0", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span className="amb-small-text" style={{ color: "#C62828" }}>⚠️ {toast}</span>
+          <button onClick={() => setToast(null)} style={{ background: "none", border: "none", cursor: "pointer", color: "#C62828", fontWeight: "bold", fontSize: "1.1em" }}>×</button>
+        </div>
+      )}
 
       <div className="amb-content">
 
