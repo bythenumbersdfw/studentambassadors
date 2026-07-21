@@ -49,7 +49,7 @@ export default function AmbassadorGame() {
   const [tapCount, setTapCount]       = useState(0);
   const [adminMode, setAdminMode]     = useState(false);
   const [adminView, setAdminView]     = useState("pending");
-  const [signupForm, setSignupForm]   = useState({ name: "", university: "", org: "", sponsorName: "", sponsorEmail: "", showOnLeaderboard: true });
+  const [signupForm, setSignupForm]   = useState({ name: "", university: "", org: "", email: "", phone: "", sponsorName: "", sponsorEmail: "", showOnLeaderboard: true });
   const [signupDone, setSignupDone]   = useState(false);
   const [linkForm, setLinkForm]       = useState({ contactName: "", note: "" });
   const [linkFlash, setLinkFlash]     = useState(false);
