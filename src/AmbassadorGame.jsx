@@ -125,11 +125,13 @@ export default function AmbassadorGame() {
   };
 
   const handleSignup = () => {
-    if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()) return;
+    if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.email.trim() || !signupForm.phone.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()) return;
     const newAmb = {
       localId:           `${Date.now()}-${Math.random()}`,
       name:              signupForm.name.trim(),
       university:        signupForm.university.trim(),
+      email:             signupForm.email.trim(),
+      phone:             signupForm.phone.trim(),
       org:               signupForm.org.trim() || "Not specified",
       sponsorName:       signupForm.sponsorName.trim(),
       sponsorEmail:      signupForm.sponsorEmail.trim(),
@@ -588,7 +590,7 @@ export default function AmbassadorGame() {
                 </div>
                 <button
                   onClick={handleSignup}
-                  disabled={!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()}
+                  disabled={!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.email.trim() || !signupForm.phone.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()}
                   className="amb-btn-primary"
                   style={{ ...btn(signupForm.name.trim() && signupForm.university.trim() && signupForm.sponsorName.trim() && signupForm.sponsorEmail.trim() ? C.navy : "#ccc", C.white), width: "100%", cursor: signupForm.name.trim() && signupForm.university.trim() && signupForm.sponsorName.trim() && signupForm.sponsorEmail.trim() ? "pointer" : "not-allowed" }}>
                   Submit Application 🤝
