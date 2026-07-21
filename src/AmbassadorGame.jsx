@@ -553,6 +553,14 @@ export default function AmbassadorGame() {
                   <input value={signupForm.university} onChange={(e) => setSignupForm({ ...signupForm, university: e.target.value })} placeholder="e.g. University of Texas at Arlington" className="amb-input-lg" style={{ width: "100%", borderRadius: 10, border: "1px solid #ccc", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: 12 }}>
+  <div className="amb-label" style={{ color: C.gray, marginBottom: 6 }}>Your email *</div>
+  <input value={signupForm.email} onChange={(e) => setSignupForm({ ...signupForm, email: e.target.value })} placeholder="you@example.com" className="amb-input-lg" style={{ width: "100%", borderRadius: 10, border: "1px solid #ccc", boxSizing: "border-box" }} />
+</div>
+<div style={{ marginBottom: 12 }}>
+  <div className="amb-label" style={{ color: C.gray, marginBottom: 6 }}>Your phone number *</div>
+  <input value={signupForm.phone} onChange={(e) => setSignupForm({ ...signupForm, phone: e.target.value })} placeholder="e.g. 214-555-0123" className="amb-input-lg" style={{ width: "100%", borderRadius: 10, border: "1px solid #ccc", boxSizing: "border-box" }} />
+</div>
+                <div style={{ marginBottom: 12 }}>
                   <div className="amb-label" style={{ color: C.gray, marginBottom: 6 }}>Your organization or affiliation (optional)</div>
                   <input value={signupForm.org} onChange={(e) => setSignupForm({ ...signupForm, org: e.target.value })} placeholder="e.g. NAHJ Student Chapter, journalism program..." className="amb-input-lg" style={{ width: "100%", borderRadius: 10, border: "1px solid #ccc", boxSizing: "border-box" }} />
                 </div>
