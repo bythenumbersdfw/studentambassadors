@@ -31,6 +31,49 @@ async function search(table, formula) {
   return data.records?.[0] || null;
 }
 
+async function getAll(table) {
+  const res = await fetch(`${BASE_URL}/${encodeURIComponent(table)}`, {
+    headers: authHeaders(),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Airtable [${table}] getAll ${res.status}: ${text}`);
+  }
+  const data = await res.json();
+  return data.records || [];
+}
+
+export async function fetchAllAmbassadors() {
+  const records = await getAll('Student Ambassadors');
+  return records.map((r) => ({
+    airtableId:        r.id,
+    name:              r.fields['Name'] || '',
+    university:        r.fields['University'] || '',
+    org:               r.fields['Organization'] || 'Not specified',
+    email:             r.fields['Email'] || '',
+    phone:             r.fields['Phone'] || '',
+    honorCodeAccepted: r.fields['Honor Code Agreement'] || false,
+    studentCode:       r.fields['Student ID'] || '',
+    showOnLeaderboard: r.fields['Leaderboard Visibility'] === 'Full name',
+    status:            r.fields['Approval Status'] === 'Approved' ? 'approved' : 'pending',
+    logs:              [],
+    localId:           r.id,
+  }));
+}
+
+const TASK_TO_ACTIVITY_TYPE = {
+  scan:      'Shared QR code — respondent reached qualifying questions — 5 pts',
+  sit:       'Brought someone to the project table — 10 pts',
+  started:   'Connection wants to participate — submitted contact info — 15 pts',
+  link:      'Shared the follow-up link — logged their name — 12 pts',
+  share:     'Shared the project on social media — 8 pts',
+  recruited: 'Brought in another student ambassador — 15 pts',
+  mvr:       'MVC nomination — student submitted — 20 pts',
+  completed: 'Connection completed the full survey — 25 pts',
+  dfw:       'DFW connection confirmed — bonus — 20 pts',
+  later:     'Post-event interest noted — 10 pts',
+};
+
 const TASK_TO_ACTIVITY_TYPE = {
   scan:      'Shared QR code — respondent reached qualifying questions — 5 pts',
   sit:       'Brought someone to the project table — 10 pts',
