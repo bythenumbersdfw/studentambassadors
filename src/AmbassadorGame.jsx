@@ -583,16 +583,6 @@ if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.emai
                       </button>
                     ))}
                   </div>
-                 <div className="amb-label" style={{ color: C.blue, marginBottom: 6 }}>Leaderboard visibility</div>
-                  <div className="amb-body-text" style={{ color: C.gray, marginBottom: 10 }}>Would you like your full name and university visible to other ambassadors on the leaderboard?</div>
-                  <div style={{ display: "flex", gap: 10 }}>
-                    {[{ label: "Yes — show my name and university", val: true }, { label: "No — show first name only", val: false }].map((opt) => (
-                      <button key={String(opt.val)} onClick={() => setSignupForm({ ...signupForm, showOnLeaderboard: opt.val })} className="amb-small-text"
-                        style={{ flex: 1, padding: "8px 6px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: "bold", textAlign: "center", background: signupForm.showOnLeaderboard === opt.val ? C.navy : C.white, color: signupForm.showOnLeaderboard === opt.val ? C.white : C.navy, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
-                        {opt.label}
-                      </button>
-                    ))}
-                  </div>
                 </div>
                 <div style={{ background: C.lgray, borderRadius: 10, padding: "12px 14px", marginBottom: 16 }}>
                   <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
