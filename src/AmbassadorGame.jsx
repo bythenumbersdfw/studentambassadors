@@ -49,8 +49,7 @@ export default function AmbassadorGame() {
   const [tapCount, setTapCount]       = useState(0);
   const [adminMode, setAdminMode]     = useState(false);
   const [adminView, setAdminView]     = useState("pending");
-  const [signupForm, setSignupForm]   = useState({ name: "", university: "", org: "", email: "", phone: "", sponsorName: "", sponsorEmail: "", showOnLeaderboard: true });
-  const [signupDone, setSignupDone]   = useState(false);
+const [signupForm, setSignupForm]     = useState({ name: "", university: "", org: "", email: "", phone: "", sponsorName: "", sponsorEmail: "", showOnLeaderboard: true, honorCodeAccepted: false });  const [signupDone, setSignupDone]   = useState(false);
   const [linkForm, setLinkForm]       = useState({ contactName: "", note: "" });
   const [linkFlash, setLinkFlash]     = useState(false);
   const [laterForm, setLaterForm]     = useState({ name: "", email: "", phone: "", ambassadorName: "", note: "" });
@@ -125,13 +124,14 @@ export default function AmbassadorGame() {
   };
 
   const handleSignup = () => {
-    if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.email.trim() || !signupForm.phone.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()) return;
+if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.email.trim() || !signupForm.phone.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim() || !signupForm.honorCodeAccepted) return;    
     const newAmb = {
       localId:           `${Date.now()}-${Math.random()}`,
       name:              signupForm.name.trim(),
       university:        signupForm.university.trim(),
       email:             signupForm.email.trim(),
       phone:             signupForm.phone.trim(),
+      honorCodeAccepted: signupForm.honorCodeAccepted,
       org:               signupForm.org.trim() || "Not specified",
       sponsorName:       signupForm.sponsorName.trim(),
       sponsorEmail:      signupForm.sponsorEmail.trim(),
@@ -583,6 +583,22 @@ export default function AmbassadorGame() {
                       </button>
                     ))}
                   </div>
+                 <div className="amb-label" style={{ color: C.blue, marginBottom: 6 }}>Leaderboard visibility</div>
+                  <div className="amb-body-text" style={{ color: C.gray, marginBottom: 10 }}>Would you like your full name and university visible to other ambassadors on the leaderboard?</div>
+                  <div style={{ display: "flex", gap: 10 }}>
+                    {[{ label: "Yes — show my name and university", val: true }, { label: "No — show first name only", val: false }].map((opt) => (
+                      <button key={String(opt.val)} onClick={() => setSignupForm({ ...signupForm, showOnLeaderboard: opt.val })} className="amb-small-text"
+                        style={{ flex: 1, padding: "8px 6px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: "bold", textAlign: "center", background: signupForm.showOnLeaderboard === opt.val ? C.navy : C.white, color: signupForm.showOnLeaderboard === opt.val ? C.white : C.navy, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ background: C.lgray, borderRadius: 10, padding: "12px 14px", marginBottom: 16 }}>
+                  <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
+                    <input type="checkbox" checked={signupForm.honorCodeAccepted} onChange={(e) => setSignupForm({ ...signupForm, honorCodeAccepted: e.target.checked })} style={{ marginTop: 4 }} />
+                    <span className="amb-small-text" style={{ color: C.gray, lineHeight: 1.5 }}>I understand that By the Numbers is a research initiative and that the accuracy of my logged activities directly supports the integrity of this project. I commit to logging only genuine interactions and representing this research honestly in every conversation. *</span>
+                  </label>
                 </div>
                 <div style={{ background: C.ltgold, border: `1px solid ${C.gold}`, borderRadius: 10, padding: "10px 14px", marginBottom: 16 }}>
                   <div className="amb-label" style={{ color: C.gold, marginBottom: 3 }}>🎁 Top ambassador wins a mentorship session with a DFW media executive</div>
@@ -590,9 +606,8 @@ export default function AmbassadorGame() {
                 </div>
                 <button
                   onClick={handleSignup}
-                  disabled={!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.email.trim() || !signupForm.phone.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim()}
-                  className="amb-btn-primary"
-                  style={{ ...btn(signupForm.name.trim() && signupForm.university.trim() && signupForm.sponsorName.trim() && signupForm.sponsorEmail.trim() ? C.navy : "#ccc", C.white), width: "100%", cursor: signupForm.name.trim() && signupForm.university.trim() && signupForm.sponsorName.trim() && signupForm.sponsorEmail.trim() ? "pointer" : "not-allowed" }}>
+               disabled={!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.email.trim() || !signupForm.phone.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim() || !signupForm.honorCodeAccepted}                  className="amb-btn-primary"
+               style={{ ...btn(signupForm.name.trim() && signupForm.university.trim() && signupForm.email.trim() && signupForm.phone.trim() && signupForm.sponsorName.trim() && signupForm.sponsorEmail.trim() && signupForm.honorCodeAccepted ? C.navy : "#ccc", C.white), width: "100%", cursor: signupForm.name.trim() && signupForm.university.trim() && signupForm.email.trim() && signupForm.phone.trim() && signupForm.sponsorName.trim() && signupForm.sponsorEmail.trim() && signupForm.honorCodeAccepted ? "pointer" : "not-allowed" }}>                  
                   Submit Application 🤝
                 </button>
               </div>
