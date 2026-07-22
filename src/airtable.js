@@ -60,13 +60,16 @@ async function findOrCreateFacultySponsor({ sponsorName, sponsorEmail, universit
   return created.id;
 }
 
-export async function submitAmbassadorSignup({ name, university, org, sponsorName, sponsorEmail, showOnLeaderboard }) {
+export async function submitAmbassadorSignup({ name, university, org, email, phone, honorCodeAccepted, sponsorName, sponsorEmail, showOnLeaderboard }) {
   const sponsorId = await findOrCreateFacultySponsor({ sponsorName, sponsorEmail, university });
 
   const amb = await post('Student Ambassadors', {
     'Name': name,
     'University': university,
     'Organization': org,
+    'Email': email,
+    'Phone': phone,
+    'Honor Code Agreement': honorCodeAccepted,
     'Leaderboard Visibility': showOnLeaderboard ? 'Full name' : 'First name only',
     'Approval Status': 'Pending',
     'Points Total': 0,
