@@ -74,19 +74,6 @@ const TASK_TO_ACTIVITY_TYPE = {
   later:     'Post-event interest noted — 10 pts',
 };
 
-const TASK_TO_ACTIVITY_TYPE = {
-  scan:      'Shared QR code — respondent reached qualifying questions — 5 pts',
-  sit:       'Brought someone to the project table — 10 pts',
-  started:   'Connection wants to participate — submitted contact info — 15 pts',
-  link:      'Shared the follow-up link — logged their name — 12 pts',
-  share:     'Shared the project on social media — 8 pts',
-  recruited: 'Brought in another student ambassador — 15 pts',
-  mvr:       'MVC nomination — student submitted — 20 pts',
-  completed: 'Connection completed the full survey — 25 pts',
-  dfw:       'DFW connection confirmed — bonus — 20 pts',
-  later:     'Post-event interest noted — 10 pts',
-};
-
 const SOURCE_TO_AIRTABLE = {
   self:    'Manual',
   founder: 'Founder Awarded',
