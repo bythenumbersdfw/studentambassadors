@@ -2,6 +2,13 @@ import { useState } from "react";
 import { useTenant } from "./TenantContext";
 import { submitAmbassadorSignup, submitActivity, submitRespondentContact } from "./airtable";
 
+function generateStudentCode() {
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const letter = letters[Math.floor(Math.random() * letters.length)];
+  const numbers = Math.floor(1000000 + Math.random() * 9000000);
+  return `${letter}${numbers}`;
+}
+
 const C = {
   navy:    "var(--amb-navy)",
   blue:    "var(--amb-blue)",
@@ -127,6 +134,7 @@ const [signupForm, setSignupForm]     = useState({ name: "", university: "", org
 if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.email.trim() || !signupForm.phone.trim() || !signupForm.sponsorName.trim() || !signupForm.sponsorEmail.trim() || !signupForm.honorCodeAccepted) return;    
     const newAmb = {
       localId:           `${Date.now()}-${Math.random()}`,
+      studentCode:       generateStudentCode(),
       name:              signupForm.name.trim(),
       university:        signupForm.university.trim(),
       email:             signupForm.email.trim(),
@@ -150,6 +158,7 @@ if (!signupForm.name.trim() || !signupForm.university.trim() || !signupForm.emai
       email:             newAmb.email,
       phone:             newAmb.phone,
       honorCodeAccepted: newAmb.honorCodeAccepted,
+      studentCode:       newAmb.studentCode, 
       sponsorName:       newAmb.sponsorName,
       sponsorEmail:      newAmb.sponsorEmail,
       showOnLeaderboard: newAmb.showOnLeaderboard,
