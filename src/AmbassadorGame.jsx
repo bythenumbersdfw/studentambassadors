@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTenant } from "./TenantContext";
-import { submitAmbassadorSignup, submitActivity, submitRespondentContact } from "./airtable";
+import { submitAmbassadorSignup, submitActivity, submitRespondentContact, fetchAllAmbassadors } from "./airtable";
 
 function generateStudentCode() {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -50,6 +50,11 @@ export default function AmbassadorGame() {
 
   const [view, setView]               = useState("leaderboard");
   const [ambassadors, setAmbassadors] = useState([]);
+  useEffect(() => {
+    fetchAllAmbassadors()
+      .then((data) => setAmbassadors(data))
+      .catch((e) => console.error("Failed to load ambassadors:", e.message));
+  }, []);
   const [selected, setSelected]       = useState(null);
   const [logForm, setLogForm]         = useState({ taskId: "", note: "", respondentName: "" });
   const [flash, setFlash]             = useState(null);
