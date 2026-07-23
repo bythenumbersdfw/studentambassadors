@@ -43,6 +43,19 @@ async function getAll(table) {
   return data.records || [];
 }
 
+export async function fetchAllActivities() {
+  const records = await getAll('Conference Activities');
+  return records.map((r) => ({
+    ambassadorId: r.fields['Student Name'] ? r.fields['Student Name'][0] : null,
+    taskId:       r.fields['Activity Type'] || '',
+    points:       r.fields['Points Awarded'] || 0,
+    source:       r.fields['Source'] === 'Founder Awarded' ? 'founder' : 'self',
+    respondentName: r.fields['Respondent Name'] || '',
+    note:         r.fields['Note'] || '',
+    time:         r.fields['Timestamp'] || '',
+  }));
+}
+
 export async function fetchAllAmbassadors() {
   const [records, activities] = await Promise.all([
     getAll('Student Ambassadors'),
