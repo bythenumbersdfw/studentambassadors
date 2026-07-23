@@ -44,7 +44,10 @@ async function getAll(table) {
 }
 
 export async function fetchAllAmbassadors() {
-  const records = await getAll('Student Ambassadors');
+  const [records, activities] = await Promise.all([
+    getAll('Student Ambassadors'),
+    fetchAllActivities(),
+  ]);
   return records.map((r) => ({
     airtableId:        r.id,
     name:              r.fields['Name'] || '',
@@ -56,7 +59,7 @@ export async function fetchAllAmbassadors() {
     studentCode:       r.fields['Student ID'] || '',
     showOnLeaderboard: r.fields['Leaderboard Visibility'] === 'Full name',
     status:            r.fields['Approval Status'] === 'Approved' ? 'approved' : 'pending',
-    logs:              [],
+    logs:              activities.filter((a) => a.ambassadorId === r.id),
     localId:           r.id,
   }));
 }
